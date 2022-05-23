@@ -21,6 +21,9 @@ public class EmployeeController {
     @Autowired
     EmployeeService service;
 
+//    @Autowired
+//    BackBaseService bbService;
+
     @GetMapping
     public ResponseEntity<List<EmployeeEntity>> getAllEmployees() {
         List<EmployeeEntity> list = service.getAllEmployees();
@@ -49,5 +52,12 @@ public class EmployeeController {
         service.deleteEmployeeById(id);
         return HttpStatus.FORBIDDEN;
     }
+
+//    @PostMapping("addUrl")
+//    public ResponseEntity<BackBaseModel> addUrl(BackBaseModel request)
+//            throws RecordNotFoundException {
+//        BackBaseModel updated = bbService.createUrl(request);
+//        return new ResponseEntity<BackBaseModel>(updated, new HttpHeaders(), HttpStatus.OK);
+//    }
 
 }
