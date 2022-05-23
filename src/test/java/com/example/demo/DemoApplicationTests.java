@@ -19,11 +19,13 @@ class DemoApplicationTests {
 	@Test
 	void HashString() throws Exception {
 		String url = "https://stash.backbase.com/projects/PO/repos/payment-order-integration-spec/browse/src/main/resources/schemas/definitions.json";
-		byte[] result = utils.encrypt(url);
-		System.out.println("#############  Encrypted URL is " + result);
+		System.out.println("#############  URL is " + url);
 
-		String decrypted = utils.decrypt(result);
-		System.out.println("############# Decrypted URL is " + decrypted);
+		String shortenUrl = utils.shortenURL(url);
+ 		System.out.println("#############  shortenUrl URL is " + shortenUrl);
+
+		String originalUrl = utils.expandURL(shortenUrl);
+		System.out.println("############# originalUrl URL is " + originalUrl);
 	}
 
 
