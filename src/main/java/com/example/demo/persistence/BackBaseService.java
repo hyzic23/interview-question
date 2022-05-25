@@ -3,18 +3,26 @@ package com.example.demo.persistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
+/**
+ * BaskBaseService is a class where the business logic is being implemented
+ */
 @Service
 public class BackBaseService {
 
     @Autowired
     BackBaseRepository repository;
 
-
-    //This is method is used to fetch/get all records in the database table
+    /**
+     * This method is used to fetch/get all records in the database table
+     * @return This returns a List of BackBaseModel
+     */
     public List<BackBaseModel> getAllEmployees()
     {
         List<BackBaseModel> backBaseUrlList = repository.findAll();
@@ -26,6 +34,12 @@ public class BackBaseService {
         }
     }
 
+    /**
+     * This method is used to get record from database using id as criteria
+     * @param id id is used as criteria to get record
+     * @return This returns record in BackBaseModel entity
+     * @throws RecordNotFoundException If record doesnot exist it returns RecordNotFoundException
+     */
     //This method is used to get record using id
     public BackBaseModel getBackBaseUrlById(Long id) throws RecordNotFoundException
     {
@@ -38,15 +52,24 @@ public class BackBaseService {
         }
     }
 
-    //This method is used to insert into Database table
-    public BackBaseModel createUrl(BackBaseModel request) throws RecordNotFoundException
+
+    /**
+     * This method is use to add/save BackBaseModel entity to database
+     * @param request This is the payload being inserted to the database
+     * @return
+     */
+    public BackBaseModel createUrl(BackBaseModel request)
     {
         BackBaseModel model = repository.save(request);
         return model;
     }
 
-
-    //Method to check get shortUrl from Database table
+    /**
+     * This method is used to fetch record from database passing shortUrl as criteria
+     * @param shortUrl is a param using as criteria to fetch database
+     * @return returns record as a String
+     * @throws RecordNotFoundException If record doesnot exist it returns RecordNotFoundException
+     */
     public String getByShortUrl(String shortUrl) throws RecordNotFoundException
     {
         BackBaseModel model = repository.getByShortUrl(shortUrl);
@@ -57,18 +80,18 @@ public class BackBaseService {
         }
     }
 
+    /**
+     * This calls the deleteAll method from the BackBaseRepository interface
+     */
+    @Transactional
+    public void deleteAll(){
+        //LocalDateTime thirtyDates = LocalDateTime.now().plusMinutes(-30);
+        //repository.deleteAll(thirtyDates);
+        repository.deleteAll();
+    }
 
 
-//    public List<BackBaseModel> getByShortUrl(String shortUrl) throws RecordNotFoundException
-//    {
-//        List<BackBaseModel> model = repository.getByShortUrl(shortUrl);
-//        if(model.size() > 0){
-//            //return (List<BackBaseModel>) model.get(0);
-//            return model;
-//        } else {
-//            throw new RecordNotFoundException("URL not found in DB");
-//        }
-//    }
+
 
 
 

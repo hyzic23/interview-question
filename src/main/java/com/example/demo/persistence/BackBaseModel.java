@@ -1,10 +1,18 @@
 package com.example.demo.persistence;
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDateTime;
+
+
+/**
+ * BackBaseModel is an entity/model representing my table in the database
+ *
+ */
+
 
 @Data
 @Entity
@@ -16,8 +24,11 @@ public class BackBaseModel {
     private String url;
     private String shortUrl;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdate;
+    @CreationTimestamp
+    private LocalDateTime createdate;
+    //@Temporal(TemporalType.TIMESTAMP)
+    //private Timestamp createdate;
+    //private LocalDateTime createdate;
 
 
 
